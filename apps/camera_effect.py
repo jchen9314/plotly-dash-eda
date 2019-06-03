@@ -10,7 +10,6 @@ import math
 from dash.dependencies import Input, Output, State
 import yaml
 import flask
-import dash_table as dt
 import warnings
 import collections
 warnings.filterwarnings("ignore")
