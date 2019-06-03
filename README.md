@@ -12,7 +12,7 @@ source activate plotly_viz
 Install necessary packages in requirements.txt.
 
 ```
-pip install -r requirements.txt
+pip install -r requirement.txt
 ```
 
 Launch the app.
