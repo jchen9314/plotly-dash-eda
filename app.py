@@ -14,7 +14,7 @@ from apps import coloranalyzer,camera_effect
 import collections
 import yaml
 import warnings
-import argparse
+# import argparse
 warnings.filterwarnings("ignore")
 plt.style.use("tableau-colorblind10")
 
@@ -23,12 +23,12 @@ external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, server=server,
                 external_stylesheets=external_stylesheets)
 app.config.suppress_callback_exceptions = True
-parser = argparse.ArgumentParser()
-parser.add_argument("--input_csv_path", type=str,
-                    help="input EDA dataset folder path")
-parser.add_argument("--output_csv_path", type=str,
-                    help="output EDA dataset file path")
-args = parser.parse_args()
+# parser = argparse.ArgumentParser()
+# parser.add_argument("--input_csv_path", type=str,
+#                     help="input EDA dataset folder path")
+# parser.add_argument("--output_csv_path", type=str,
+#                     help="output EDA dataset file path")
+# args = parser.parse_args()
 
 tab_style = {
     'padding': '10px',
@@ -110,8 +110,8 @@ def create_dataset(file):
             df[col] = df[col]
     return df
 
-file = os.path.join(args.input_csv_path,"complete_joined_df.csv")
-# output_file = args.output_csv_path
+file = os.path.join("data","complete_joined_df.csv")
+
 df = create_dataset(file)
 dct = dict(collections.Counter(df.Type))
 ls_type = []
@@ -236,7 +236,7 @@ def save_current_table(savebutton, feat_name, channel, feat_lower_bound,
         tmp = df[df[tier].isin(rocks)]
         res = tmp[(tmp[colname]>=yaml.load(feat_lower_bound)) &\
                   (tmp[colname]<=yaml.load(feat_upper_bound))][show_cols]
-        res.to_csv(os.path.join(args.output_csv_path,"tmp_color_analysis_result.csv"))
+        res.to_csv(os.path.join("data","tmp_color_analysis_result.csv"))
         return "Table saved."
 
 # camera effect tab
@@ -470,7 +470,7 @@ def save_current_table(savebutton, feat_name, channel, feat_lower_bound,
         tmp = df[(df[tier] == rock) & (df["camera"].isin(model))]
         res = tmp[(tmp[colname]>=yaml.load(feat_lower_bound)) &\
                   (tmp[colname]<=yaml.load(feat_upper_bound))][show_cols]
-        res.to_csv(os.path.join(args.output_csv_path,"tmp_camera_effect_result.csv"))
+        res.to_csv(os.path.join("data","tmp_camera_effect_result.csv"))
         return "Table saved."
 
 
